@@ -2,8 +2,6 @@ import request from 'request'
 import { TechnicalMethods } from '../config/methods'
 import { Methods, Pair, UrlData } from '../types/network'
 
-const API_KEY = 'a0617c2b98a646c69ffdf320431f71df'
-
 const make = <T, K>({ url, method, body }: UrlData = {
   url: '',
   json: true,
@@ -12,7 +10,7 @@ const make = <T, K>({ url, method, body }: UrlData = {
 
   const requestOptions = {
     baseUrl: 'https://api.twelvedata.com',
-    url: url
+    url: `${url}`,
   }
 
   return new Promise((resolve: (value: T) => void, reject) => {
@@ -44,12 +42,11 @@ export const requestPair = (pair: Pair) => {
 
 export const requestPairFrom = async ({ pair, from }: Pair) => {
   return make<Pair, UrlData>({
-    url: `time_series?symbol=${pair}&interval=5min&outputsize=5&apikey=${API_KEY}`,
+    url: `time_series?symbol=${pair}&interval=5min&outputsize=5&apikey=${process.env.API_KEY}`,
   })
 }
 
 export const requestComplexFrom = async ({ pair, from, to }: Pair) => {
-
   const body = {
     symbols: [pair],
     intervals: ["1day"],
@@ -62,7 +59,7 @@ export const requestComplexFrom = async ({ pair, from, to }: Pair) => {
   }
 
   return make<Pair, UrlData>({
-    url: `complex_data?apikey=${API_KEY}`,
+    url: `complex_data?apikey=${process.env.API_KEY}`,
     method: Methods.POST,
     body: JSON.stringify(body)
   })

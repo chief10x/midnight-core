@@ -1,10 +1,12 @@
+import dotenv from 'dotenv'
 import yargs from 'yargs'
-import chalk from 'chalk'
 import { requestComplexFrom, requestPair } from './network/request-builder'
 import { hideBin } from 'yargs/helpers'
 import { PairCommandOption } from './types/network'
 import Mongo from './mongo/mongo'
 import { Log } from './utils/logger'
+
+dotenv.config()
 
 // const mongo = new Mongo()
 // mongo.connect().then((db) => {
