@@ -1,4 +1,4 @@
-export const TechnicalMethods = {
+export const TechnicalMethods: {[key: string]: any} = {
   TimeSeries: 'time_series',
   ATR: {
     name: "atr",

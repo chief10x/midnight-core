@@ -2,9 +2,10 @@ import dotenv from 'dotenv'
 import yargs from 'yargs'
 import { requestComplexFrom, requestPair } from './network/request-builder'
 import { hideBin } from 'yargs/helpers'
-import { PairCommandOption } from './types/network'
+import { ComplexRequestBody, Intervals, PairCommandOption } from './types/network'
 import Mongo from './mongo/mongo'
 import { Log } from './utils/logger'
+import { TechnicalMethods } from './config/methods'
 
 dotenv.config()
 
@@ -25,7 +26,18 @@ yargs(hideBin(process.argv))
     if (verbose)
       console.info(`Getting Pair Information: ${pair}`)
 
-    requestComplexFrom({ pair: pair }).then(value => {
+    const body: ComplexRequestBody = {
+      symbols: [pair],
+      intervals: [Intervals.DAY],
+      start_date: '2021-03-21',
+      end_date: '2021-03-25',
+      methods: [
+        TechnicalMethods.TimeSeries,
+        TechnicalMethods.ATR,
+      ]
+    }
+
+    requestComplexFrom(body).then(value => {
       Log.log(value)
     })
   })

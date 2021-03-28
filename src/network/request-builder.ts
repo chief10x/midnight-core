@@ -1,6 +1,6 @@
 import request from 'request'
 import { TechnicalMethods } from '../config/methods'
-import { Methods, Pair, UrlData } from '../types/network'
+import { ComplexRequestBody, Intervals, Methods, Pair, UrlData } from '../types/network'
 
 const make = <T, K>({ url, method, body }: UrlData = {
   url: '',
@@ -42,24 +42,13 @@ export const requestPair = (pair: Pair) => {
 
 export const requestPairFrom = async ({ pair, from }: Pair) => {
   return make<Pair, UrlData>({
-    url: `time_series?symbol=${pair}&interval=5min&outputsize=5&apikey=${process.env.API_KEY}`,
+    url: `time_series?symbol=${pair}&interval=5min&outputsize=5&apikey=${process.env.api_key}`,
   })
 }
 
-export const requestComplexFrom = async ({ pair, from, to }: Pair) => {
-  const body = {
-    symbols: [pair],
-    intervals: ["1day"],
-    start_date: '2021-03-21',
-    end_data: '2021-03-25',
-    methods: [
-      TechnicalMethods.TimeSeries,
-      TechnicalMethods.ATR,
-    ]
-  }
-
+export const requestComplexFrom = async (body: ComplexRequestBody) => {
   return make<Pair, UrlData>({
-    url: `complex_data?apikey=${process.env.API_KEY}`,
+    url: `complex_data?apikey=${process.env.api_key}`,
     method: Methods.POST,
     body: JSON.stringify(body)
   })
