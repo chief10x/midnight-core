@@ -1,6 +1,6 @@
 import yargs from 'yargs'
 import chalk from 'chalk'
-import { requestPair } from './network/request-builder'
+import { requestComplexFrom, requestPair } from './network/request-builder'
 import { hideBin } from 'yargs/helpers'
 import { PairCommandOption } from './types/network'
 import Mongo from './mongo/mongo'
@@ -23,7 +23,7 @@ yargs(hideBin(process.argv))
     if (verbose)
       console.info(`Getting Pair Information: ${pair}`)
 
-    requestPair({ pair: pair }).then(value => {
+    requestComplexFrom({ pair: pair }).then(value => {
       Log.log(value)
     })
   })
