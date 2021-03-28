@@ -4,6 +4,7 @@ import { requestPair } from './network/request-builder'
 import { hideBin } from 'yargs/helpers'
 import { PairCommandOption } from './types/network'
 import Mongo from './mongo/mongo'
+import { Log } from './utils/logger'
 
 // const mongo = new Mongo()
 // mongo.connect().then((db) => {
@@ -23,7 +24,7 @@ yargs(hideBin(process.argv))
       console.info(`Getting Pair Information: ${pair}`)
 
     requestPair({ pair: pair }).then(value => {
-      console.log(value)
+      Log.log(value)
     })
   })
   .command('pair-from [pair] [from]', 'Get the Pair information from a Date', (yargs) => {

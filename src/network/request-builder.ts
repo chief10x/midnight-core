@@ -1,4 +1,4 @@
-import request, { CoreOptions } from 'request'
+import request from 'request'
 import { Pair, UrlData } from '../types/network'
 
 const API_KEY = 'a0617c2b98a646c69ffdf320431f71df'
@@ -26,5 +26,5 @@ export const requestPair = (pair: Pair) => {
 }
 
 export const requestPairFrom = async ({ pair, from }: Pair) => {
-  return make<Pair, UrlData>({ url: `time_series?symbol=${pair}&interval=1min&apikey=${API_KEY}` })
+  return make<Pair, UrlData>({ url: `time_series?symbol=${pair}&interval=5min&apikey=${API_KEY}` })
 }
