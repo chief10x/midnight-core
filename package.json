@@ -18,8 +18,10 @@
   "author": {
     "name": "Amin"
   },
+  "proxy": "http://localhost:3000",
   "license": "Apache-2.0",
   "devDependencies": {
+    "@types/cors": "^2.8.10",
     "@types/mongodb": "^3.6.9",
     "@types/node": "^14.14.31",
     "@types/request": "^2.48.5",
@@ -31,6 +33,7 @@
     "@types/express": "^4.17.11",
     "body-parser": "^1.19.0",
     "chalk": "^4.1.0",
+    "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "mongodb": "^3.6.4",

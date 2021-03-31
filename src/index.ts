@@ -2,7 +2,7 @@ import dotenv from 'dotenv'
 import yargs from 'yargs'
 import { requestComplexFrom, requestPair } from './network/request-builder'
 import { hideBin } from 'yargs/helpers'
-import { ComplexRequestBody, Intervals, PairCommandOption } from './types/network'
+import { ComplexRequestBody, Intervals, ListOrder, PairCommandOption } from './types/network'
 import Mongo from './mongo/mongo'
 import { Log } from './utils/logger'
 import { TechnicalMethods } from './config/methods'
@@ -31,6 +31,8 @@ yargs(hideBin(process.argv))
       intervals: [Intervals.DAY],
       start_date: '2021-03-21',
       end_date: '2021-03-25',
+      order: ListOrder.ASC,
+      timezone: 'Europe/Rome',
       methods: [
         TechnicalMethods.TimeSeries,
         TechnicalMethods.ATR,

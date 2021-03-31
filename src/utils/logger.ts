@@ -27,7 +27,6 @@ export class Log {
   )
 
   static log = (message: any) => {
-    console.log(message)
     Log.getInstance().logger.log('info', message)
   }
 }

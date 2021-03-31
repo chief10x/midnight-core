@@ -3,6 +3,11 @@ export enum Methods {
   GET
 }
 
+export enum ListOrder {
+  ASC,
+  DESC
+}
+
 export enum Currencies {
   EURUSD = 'EUR/USD',
   GBPUSD = 'GBP/USD'
@@ -31,7 +36,9 @@ export interface ComplexRequestBody {
   intervals: Array<Intervals>,
   start_date: string,
   end_date: string,
-  methods: Array<any>
+  methods: Array<any>,
+  order: ListOrder,
+  timezone: string
 }
 
 export interface PairData {

@@ -2,7 +2,7 @@ import request from 'request'
 import { TechnicalMethods } from '../config/methods'
 import { ComplexRequestBody, Intervals, Methods, Pair, UrlData } from '../types/network'
 
-const make = <T, K>({ url, method, body }: UrlData = {
+const make = <T, K>({ url, method = Methods.GET, body }: UrlData = {
   url: '',
   json: true,
   method: Methods.GET
@@ -14,10 +14,10 @@ const make = <T, K>({ url, method, body }: UrlData = {
   }
 
   return new Promise((resolve: (value: T) => void, reject) => {
-
     switch (method) {
       case Methods.GET:
         request(requestOptions, (error, { body }) => {
+          
           if (error)
             return reject(error)
 
@@ -43,6 +43,12 @@ export const requestPair = (pair: Pair) => {
 export const requestPairFrom = async ({ pair, from }: Pair) => {
   return make<Pair, UrlData>({
     url: `time_series?symbol=${pair}&interval=5min&outputsize=5&apikey=${process.env.api_key}`,
+  })
+}
+
+export const requestPairFromQuery = async (query: string) => {
+  return make<Pair, UrlData>({
+    url: `time_series?${query}&apikey=${process.env.api_key}`,
   })
 }
 
