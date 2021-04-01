@@ -41,6 +41,16 @@ export interface ComplexRequestBody {
   timezone: string
 }
 
+export interface ComplexResponse {
+  date: Date,
+  high: Number,
+  low: Number,
+  open: Number,
+  close: Number,
+  atr: Number,
+  ichi: Number,
+}
+
 export interface PairData {
   pair: string
 }

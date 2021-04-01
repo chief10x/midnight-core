@@ -5,6 +5,7 @@ import bodyParser from 'body-parser'
 import chalk from 'chalk'
 import { requestComplexFrom, requestPairFrom, requestPairFromQuery } from './network/request-builder'
 import { Log } from './utils/logger'
+import { formatComplexResponse } from './utils/formatter'
 
 dotenv.config()
 const app = express()
@@ -16,15 +17,17 @@ app.get('/', (req, res) => {
 })
 
 app.post('/complex', (req, res) => {
-  requestComplexFrom(req.body).then((response) => {
-    Log.log(response)
-    res.send(response)    
-  })
+  requestComplexFrom(req.body)
+    .then((resJson) => {
+      const complex = formatComplexResponse(JSON.parse(resJson))
+      console.log(complex)
+      res.send(complex)
+    })
 })
 
 app.post('/series', (req, res) => {
   console.log('request received')
-  requestPairFromQuery(req.body.query).then((response) => {    
+  requestPairFromQuery(req.body.query).then((response) => {
     Log.log(response)
     res.send(response)
   })

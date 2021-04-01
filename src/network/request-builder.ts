@@ -42,19 +42,19 @@ export const requestPair = (pair: Pair) => {
 
 export const requestPairFrom = async ({ pair, from }: Pair) => {
   return make<Pair, UrlData>({
-    url: `time_series?symbol=${pair}&interval=5min&outputsize=5&apikey=${process.env.api_key}`,
+    url: `time_series?symbol=${pair}&interval=5min&outputsize=5&apikey=${process.env.api_key2}`,
   })
 }
 
 export const requestPairFromQuery = async (query: string) => {
   return make<Pair, UrlData>({
-    url: `time_series?${query}&apikey=${process.env.api_key}`,
+    url: `time_series?${query}&apikey=${process.env.api_key2}`,
   })
 }
 
 export const requestComplexFrom = async (body: ComplexRequestBody) => {
   return make<Pair, UrlData>({
-    url: `complex_data?apikey=${process.env.api_key}`,
+    url: `complex_data?apikey=${process.env.api_key2}`,
     method: Methods.POST,
     body: JSON.stringify(body)
   })
