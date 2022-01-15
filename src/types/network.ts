@@ -15,7 +15,8 @@ export enum Currencies {
 
 export enum Intervals {
   DAY = '1day',
-  HOUR = '1hour'
+  HOUR = '1h',
+  Minute = '30min',
 }
 
 export interface UrlData {
@@ -38,6 +39,7 @@ export interface ComplexRequestBody {
   end_date: string,
   methods: Array<any>,
   order: ListOrder,
+  outputsize: number,
   timezone: string
 }
 

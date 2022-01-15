@@ -10,6 +10,7 @@
     "build": "ts-node ./tasks/run-build.ts",
     "build:dev": "ts-node --project ./tsconfig-dev.json ./tasks/run-build.ts -d",
     "start": "node ./dist/index.js",
+    "active:signal": "node ./dist/index.js -- active:signal",
     "watch:api": "nodemon ./dist/api.js",
     "watch": "nodemon ./dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -22,6 +23,7 @@
   "license": "Apache-2.0",
   "devDependencies": {
     "@types/cors": "^2.8.10",
+    "@types/d3-time-format": "^3.0.0",
     "@types/mongodb": "^3.6.9",
     "@types/node": "^14.14.31",
     "@types/request": "^2.48.5",
@@ -34,6 +36,7 @@
     "body-parser": "^1.19.0",
     "chalk": "^4.1.0",
     "cors": "^2.8.5",
+    "d3-time-format": "^3.0.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "mongodb": "^3.6.4",

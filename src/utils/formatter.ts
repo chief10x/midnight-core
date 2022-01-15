@@ -1,4 +1,5 @@
 import { ComplexResponse } from "../types/network"
+import { timeFormat } from "d3-time-format";
 import { Log } from "./logger"
 
 export const formatComplexResponse = (resJson): Array<ComplexResponse> => {
@@ -38,4 +39,8 @@ export const formatComplexResponse = (resJson): Array<ComplexResponse> => {
     return res
   }
   return resJson
+}
+
+export const now = () => {
+  return timeFormat("%Y-%m-%d %H:%M:%S")(new Date())
 }

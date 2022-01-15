@@ -2,10 +2,11 @@ import dotenv from 'dotenv'
 import yargs from 'yargs'
 import { requestComplexFrom, requestPair } from './network/request-builder'
 import { hideBin } from 'yargs/helpers'
-import { ComplexRequestBody, Intervals, ListOrder, PairCommandOption } from './types/network'
+import { ComplexRequestBody, Currencies, Intervals, ListOrder, PairCommandOption } from './types/network'
 import Mongo from './mongo/mongo'
 import { Log } from './utils/logger'
 import { TechnicalMethods } from './config/methods'
+import { SignalDetector } from './singal/SignalDetector'
 
 dotenv.config()
 
@@ -16,6 +17,14 @@ dotenv.config()
 // })
 
 yargs(hideBin(process.argv))
+  .command('active:signal', 'Activate signal core', (yargs) => {
+    console.log('Activating Signal Search!')
+    const detector = new SignalDetector({
+      dates: ['', ''],
+      interval: Intervals.Minute,
+      symbol: Currencies.EURUSD
+    })
+  })
   .command('pair [pair]', 'Get the Pair information', (yargs) => {
     yargs
       .positional('pair', {
@@ -32,6 +41,7 @@ yargs(hideBin(process.argv))
       start_date: '2021-03-21',
       end_date: '2021-03-25',
       order: ListOrder.ASC,
+      outputsize: 100,
       timezone: 'Europe/Rome',
       methods: [
         TechnicalMethods.TimeSeries,
