@@ -1,10 +1,10 @@
-import { ComplexResponse, Currencies, Intervals, ListOrder } from "../types/network";
+import { ComplexResponse, Currencies, Intervals } from "../types/network";
 import { getData } from "../utils/data";
 
 export interface SignalDetectorProps {
   symbol: Currencies,
   interval: Intervals,
-  dates?: [startDate: string, endDate: string],
+  dates?: [string, string],
 }
 
 export class SignalDetector {
