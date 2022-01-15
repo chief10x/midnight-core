@@ -14,7 +14,8 @@
     "watch:api": "nodemon ./dist/api.js",
     "watch": "nodemon ./dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "release": "ts-node ./tasks/run-release.ts"
+    "release": "ts-node ./tasks/run-release.ts",
+    "postinstall": "npm run build"
   },
   "author": {
     "name": "Amin"
@@ -44,5 +45,8 @@
     "request": "^2.88.2",
     "winston": "^3.3.3",
     "yargs": "^16.2.0"
+  },
+  "engines": {
+    "node": "16.13.2"
   }
 }
