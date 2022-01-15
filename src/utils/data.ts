@@ -6,6 +6,6 @@ import { formatComplexResponse } from "./formatter";
 
 export const getData =
   async (signalDetectorProps: SignalDetectorProps): Promise<ComplexResponse[]> => {
-    return requestComplexFrom(complexDataBody(signalDetectorProps))
+    return requestComplexFrom(signalDetectorProps)
       .then((response) => formatComplexResponse(response))
   }

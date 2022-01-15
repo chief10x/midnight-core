@@ -1,11 +1,9 @@
 import dotenv from 'dotenv'
 import yargs from 'yargs'
-import { requestComplexFrom, requestPair } from './network/request-builder'
+import { requestComplexFrom } from './network/request-builder'
 import { hideBin } from 'yargs/helpers'
-import { ComplexRequestBody, Currencies, Intervals, ListOrder, PairCommandOption } from './types/network'
-import Mongo from './mongo/mongo'
+import { Currencies, Intervals, PairCommandOption } from './types/network'
 import { Log } from './utils/logger'
-import { TechnicalMethods } from './config/methods'
 import { SignalDetector, SignalDetectorProps } from './singal/SignalDetector'
 
 dotenv.config()
