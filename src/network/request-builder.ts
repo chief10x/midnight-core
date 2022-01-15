@@ -1,6 +1,9 @@
 import request from 'request'
 import { TechnicalMethods } from '../config/methods'
-import { ComplexRequestBody, Intervals, Methods, Pair, UrlData } from '../types/network'
+import { SignalDetectorProps } from '../singal/SignalDetector'
+import { ComplexRequestBody, ComplexResponse, Currencies, Intervals, ListOrder, Methods, Pair, UrlData } from '../types/network'
+import { now } from '../utils/formatter'
+import { complexDataBody } from './body-creator'
 
 const make = <T, K>({ url, method = Methods.GET, body }: UrlData = {
   url: '',
@@ -17,7 +20,7 @@ const make = <T, K>({ url, method = Methods.GET, body }: UrlData = {
     switch (method) {
       case Methods.GET:
         request(requestOptions, (error, { body }) => {
-          
+
           if (error)
             return reject(error)
 
@@ -52,8 +55,11 @@ export const requestPairFromQuery = async (query: string) => {
   })
 }
 
-export const requestComplexFrom = async (body: ComplexRequestBody) => {
-  return make<Pair, UrlData>({
+export const requestComplexFrom = async (props: SignalDetectorProps) => {
+
+  const body = complexDataBody(props)
+
+  return make<ComplexResponse, UrlData>({
     url: `complex_data?apikey=${process.env.api_key2}`,
     method: Methods.POST,
     body: JSON.stringify(body)

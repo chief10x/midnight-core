@@ -4,8 +4,8 @@ export enum Methods {
 }
 
 export enum ListOrder {
-  ASC,
-  DESC
+  ASC = 'ASC',
+  DESC = 'DESC'
 }
 
 export enum Currencies {
@@ -35,8 +35,8 @@ export interface Pair {
 export interface ComplexRequestBody {
   symbols: Array<Currencies>,
   intervals: Array<Intervals>,
-  start_date: string,
-  end_date: string,
+  start_date?: string,
+  end_date?: string,
   methods: Array<any>,
   order: ListOrder,
   outputsize: number,
@@ -58,5 +58,6 @@ export interface PairData {
 }
 
 export interface PairCommandOption extends Pair {
-  verbose: boolean
+  verbose: boolean,
+  pair: Currencies
 }
