@@ -12,8 +12,10 @@ const app = express()
 app.use(cors())
 app.use(bodyParser.json())
 
+const port = process.env.PORT || 3000
+
 app.get('/', (_, res) => {
-  res.send('Shatter reporting for duty!')
+  res.send(`mj-core is listening on ${chalk.green(port)} 🔥`)
 })
 
 // Fully Functioning & Updated with Signal Detector
@@ -35,8 +37,6 @@ app.post('/series', (req, res) => {
   })
 })
 
-const port = process.env.port || 3000
-
 app.listen(port, () => {
-  console.log('shatter-server is listening on', chalk.green(process.env.port))
+  console.log('mj-core is listening on', chalk.green(port), '🔥')
 })
