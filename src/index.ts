@@ -6,7 +6,7 @@ import { ComplexRequestBody, Currencies, Intervals, ListOrder, PairCommandOption
 import Mongo from './mongo/mongo'
 import { Log } from './utils/logger'
 import { TechnicalMethods } from './config/methods'
-import { SignalDetector } from './singal/SignalDetector'
+import { SignalDetector, SignalDetectorProps } from './singal/SignalDetector'
 
 dotenv.config()
 
@@ -29,24 +29,15 @@ yargs(hideBin(process.argv))
     yargs
       .positional('pair', {
         describe: 'The selected Pair',
-        default: 'EUR/USD'
+        default: Currencies.EURUSD
       })
   }, ({ pair, verbose }: PairCommandOption) => {
     if (verbose)
       console.info(`Getting Pair Information: ${pair}`)
 
-    const body: ComplexRequestBody = {
-      symbols: [pair],
-      intervals: [Intervals.DAY],
-      start_date: '2021-03-21',
-      end_date: '2021-03-25',
-      order: ListOrder.ASC,
-      outputsize: 100,
-      timezone: 'Europe/Rome',
-      methods: [
-        TechnicalMethods.TimeSeries,
-        TechnicalMethods.ATR,
-      ]
+    const body: SignalDetectorProps = {
+      symbol: pair,
+      interval: Intervals.DAY
     }
 
     requestComplexFrom(body).then(value => {

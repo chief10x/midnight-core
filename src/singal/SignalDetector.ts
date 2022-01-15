@@ -4,7 +4,7 @@ import { getData } from "../utils/data";
 export interface SignalDetectorProps {
   symbol: Currencies,
   interval: Intervals,
-  dates: [startDate: string, endDate: string],
+  dates?: [startDate: string, endDate: string],
 }
 
 export class SignalDetector {

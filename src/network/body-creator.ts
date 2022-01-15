@@ -6,9 +6,9 @@ export const complexDataBody =
   ({ symbol, interval }: SignalDetectorProps): ComplexRequestBody => ({
     symbols: [symbol],
     intervals: [interval],
-    start_date: '2021-03-27',
+    start_date: '2022-01-8',
     end_date: now(),
-    outputsize: 12,
+    outputsize: 1,
     order: ListOrder.ASC,
     timezone: 'Europe/Rome',
     methods: [
@@ -21,12 +21,15 @@ export const complexDataBody =
         name: 'ichimoku',
         symbol: [symbol],
         interval: [interval],
+        start_date: '2022-01-8',
         end_date: now(),
       }, {
         name: 'macd',
         symbol: [symbol],
         order: ListOrder.ASC,
         interval: [interval],
+        start_date: '2022-01-8',
+        end_date: now(),
         fast_period: 20,
         slow_period: 40
       }
