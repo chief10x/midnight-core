@@ -35,6 +35,8 @@ app.post('/series', (req, res) => {
   })
 })
 
-app.listen(process.env.port, () => {
+const port = process.env.port || 3000
+
+app.listen(port, () => {
   console.log('shatter-server is listening on', chalk.green(process.env.port))
 })
