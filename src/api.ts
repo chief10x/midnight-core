@@ -24,9 +24,7 @@ app.post('/webhook', (req, res) => {
 
   const body = req.body
 
-  console.log(body)
-
-  sendMessageToDiscord()
+  sendMessageToDiscord(body)
     .then(() => {
       res.send({
         status: 'Message sent successfully',

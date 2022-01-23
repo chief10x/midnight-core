@@ -1,6 +1,7 @@
 import request, { CoreOptions } from 'request'
 import { TechnicalMethods } from '../config/methods'
 import { SignalDetectorProps } from '../singal/SignalDetector'
+import { AlarmData } from '../types/alarm-hook'
 import { ComplexRequestBody, ComplexResponse, Currencies, Intervals, ListOrder, Methods, Pair, UrlData } from '../types/network'
 import { now } from '../utils/formatter'
 import { complexDataBody } from './body-creator'
@@ -66,10 +67,14 @@ export const requestComplexFrom = async (props: SignalDetectorProps) => {
   })
 }
 
-export const sendMessageToDiscord = async () => {
+export const sendMessageToDiscord = async (data: AlarmData) => {
   const url = process.env.DISCORD_HOOK || ''
+
+  const title = `<:sus:930429523642708038> **${data.ticker}**\n`
+  const content = `${title}*${data.close}* Movement with Volume of ${data.volume}`
+
   const body = {
-    "content": "<:sus:930429523642708038> **Sus Movement**\n*{{ticker}}* USD is back at going to hell apparently **`{{close}}`**"
+    "content": content
   }
 
   request.post(url, { form: body })
