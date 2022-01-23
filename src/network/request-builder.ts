@@ -1,4 +1,4 @@
-import request from 'request'
+import request, { CoreOptions } from 'request'
 import { TechnicalMethods } from '../config/methods'
 import { SignalDetectorProps } from '../singal/SignalDetector'
 import { ComplexRequestBody, ComplexResponse, Currencies, Intervals, ListOrder, Methods, Pair, UrlData } from '../types/network'
@@ -13,7 +13,7 @@ const make = <T, K>({ url, method = Methods.GET, body }: UrlData = {
 
   const requestOptions = {
     baseUrl: 'https://api.twelvedata.com',
-    url: `${url}`,
+    url: url,
   }
 
   return new Promise((resolve: (value: T) => void, reject) => {
@@ -64,4 +64,13 @@ export const requestComplexFrom = async (props: SignalDetectorProps) => {
     method: Methods.POST,
     body: JSON.stringify(body)
   })
+}
+
+export const sendMessageToDiscord = async () => {
+  const url = process.env.DISCORD_HOOK || ''
+  const body = {
+    "content": "<:sus:930429523642708038> **Sus Movement**\n*{{ticker}}* USD is back at going to hell apparently **`{{close}}`**"
+  }
+
+  request.post(url, { form: body })
 }

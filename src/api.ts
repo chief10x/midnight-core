@@ -3,19 +3,36 @@ import express from 'express'
 import cors from 'cors'
 import bodyParser from 'body-parser'
 import chalk from 'chalk'
-import { requestComplexFrom, requestPairFromQuery } from './network/request-builder'
+import { requestComplexFrom, requestPairFromQuery, sendMessageToDiscord } from './network/request-builder'
 import { Log } from './utils/logger'
 import { formatComplexResponse } from './utils/formatter'
 
 dotenv.config()
 const app = express()
 app.use(cors())
-app.use(bodyParser.json())
+app.use(express.json())
 
 const port = process.env.PORT || 3000
 
 app.get('/', (_, res) => {
-  res.send(`mj-core is listening on ${chalk.green(port)} 🔥`)
+  res.send({
+    status: `mj-core is listening on ${port})} 🔥`
+  })
+})
+
+app.post('/webhook', (req, res) => {
+
+  const body = req.body
+
+  console.log(body)
+
+  sendMessageToDiscord()
+    .then(() => {
+      res.send({
+        status: 'Message sent successfully',
+        args: body
+      })
+    })
 })
 
 // Fully Functioning & Updated with Signal Detector
