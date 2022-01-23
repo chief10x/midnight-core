@@ -20,10 +20,10 @@ app.get('/', (_, res) => {
 
 // Fully Functioning & Updated with Signal Detector
 app.post('/complex', (req, res) => {
+  console.log('request body', req.body)
   requestComplexFrom(req.body)
     .then((resJson) => {
       const complex = formatComplexResponse(resJson)
-      console.log(complex)
       res.send(complex)
     })
 })
