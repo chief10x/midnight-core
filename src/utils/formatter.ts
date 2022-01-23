@@ -38,7 +38,7 @@ export const formatComplexResponse = (resJson): Array<ComplexResponse> => {
 
     return res
   }
-  return resJson
+  return JSON.parse(resJson)
 }
 
 export const now = () => {
