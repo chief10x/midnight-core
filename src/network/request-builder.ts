@@ -68,7 +68,8 @@ export const requestComplexFrom = async (props: SignalDetectorProps) => {
 }
 
 export const sendMessageToDiscord = async (data: AlarmData) => {
-  const url = process.env.DISCORD_HOOK || ''
+  //const url = process.env.DISCORD_HOOK || ''
+  const url = 'https://discord.com/api/webhooks/930417557649903638/SXs6ooFcJhh2MtVKmrsUUV-Q_ur6b8jJ0UWHB3Xc7WC4qKVEcTLmBdkUvdHPZjoHHkNh'
 
   const title = `<:sus:930429523642708038> **${data.ticker}**\n`
   const content = `${title}*${data.close}* Movement with Volume of ${data.volume}`
