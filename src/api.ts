@@ -1,7 +1,6 @@
 import dotenv from 'dotenv'
 import express from 'express'
 import cors from 'cors'
-import bodyParser from 'body-parser'
 import chalk from 'chalk'
 import { requestComplexFrom, requestPairFromQuery, sendMessageToDiscord } from './network/request-builder'
 import { Log } from './utils/logger'
