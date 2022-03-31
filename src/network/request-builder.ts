@@ -60,7 +60,7 @@ export const requestComplexFrom = async (props: SignalDetectorProps) => {
 
   const body = complexDataBody(props)
 
-  return make<ComplexResponse, UrlData>({
+  return make<string, UrlData>({
     url: `complex_data?apikey=${process.env.api_key2}`,
     method: Methods.POST,
     body: JSON.stringify(body)
@@ -69,7 +69,7 @@ export const requestComplexFrom = async (props: SignalDetectorProps) => {
 
 export const sendMessageToDiscord = async (data: AlarmData) => {
   const baseUrl = process.env.DISCORD_BASE || ""
-  const url = process.env.DISCORD_HOOK  || ""
+  const url = process.env.DISCORD_HOOK || ""
 
   const title = `<:sus:930429523642708038> **${data.ticker}**\n`
   const content = `${title}*${data.close}* Movement with Volume of ${data.volume}`
@@ -80,7 +80,7 @@ export const sendMessageToDiscord = async (data: AlarmData) => {
 
   const requestOptions = {
     baseUrl: baseUrl,
-    url:url,
+    url: url,
   }
 
   request.post(requestOptions).form(body)
