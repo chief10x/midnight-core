@@ -1,5 +1,5 @@
 import { complexDataBody } from "./bodyCreator";
-import { requestBuilder } from "./requestBuilder";
+import { RequestBuilder } from "./RequestBuilder";
 import { SignalDetectorProps } from "../signal/SignalDetector";
 import { ComplexResponse } from "./types/network";
 import { formatComplexResponse } from "./formatter";

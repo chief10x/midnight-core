@@ -1,16 +1,17 @@
-import { Injectable, Scope } from '@nestjs/common';
 import { SignalDetectorProps } from '../signal/SignalDetector';
-import { requestBuilder } from '../util/requestBuilder'
-import {formatComplexResponse} from '../util/formatter'
+import { RequestBuilder } from '../util/RequestBuilder'
+import { formatComplexResponse } from '../util/formatter'
 
-@Injectable()
 export class SeriesService {
 
-    private readonly builder: requestBuilder = new requestBuilder()
+    private readonly builder: RequestBuilder = new RequestBuilder()
 
     async postComplex(body: SignalDetectorProps) {
         const response = await this.builder.requestComplexFrom(body)
-        const complex = formatComplexResponse(response)
-        return complex
+        return formatComplexResponse(response)
+    }
+
+    async postSeries(body: string) {
+        return await this.builder.requestPairFromQuery(body)
     }
 }

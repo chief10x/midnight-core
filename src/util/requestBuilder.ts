@@ -1,19 +1,15 @@
-import request from 'request'
-// import { TechnicalMethods } from '../config/methods'
 import { SignalDetectorProps } from '../signal/SignalDetector'
 import { AlarmData } from './types/alarmHook'
 import { ComplexRequestBody, ComplexResponse, Currencies, Intervals, ListOrder, Methods, Pair, UrlData } from './types/network'
-// import { now } from '../utils/formatter'
 import { complexDataBody } from './bodyCreator'
 import fetch from 'node-fetch';
+
 var headers = {
   'Content-Type': 'application/json',
 };
 
-export class requestBuilder {
-  static requestComplexFrom(signalDetectorProps: SignalDetectorProps) {
-    throw new Error("Method not implemented.")
-  }
+export class RequestBuilder {
+
   make = <T, K>({ url, method = Methods.GET, body }: UrlData = {
     url: '',
     json: true,
@@ -80,7 +76,7 @@ export class requestBuilder {
     })
   }
 
-  sendMessageToDiscord = async (data: AlarmData) => {
+  async sendMessageToDiscord(data: AlarmData) {
     const baseUrl = process.env.DISCORD_BASE || ""
     const url = process.env.DISCORD_HOOK || ""
 
@@ -96,6 +92,12 @@ export class requestBuilder {
       url: url,
     }
 
-    request.post(requestOptions).form(body)
+    await fetch(requestOptions.baseUrl + "/" + requestOptions.url, {
+      body: body,
+      method: 'post',
+      headers: headers
+    }).catch((e) => {
+
+    })
   }
 }
