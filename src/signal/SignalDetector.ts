@@ -5,6 +5,8 @@ export interface SignalDetectorProps {
   symbol: Currencies,
   interval: Intervals,
   dates?: [string, string],
+  start_date: string,
+  end_date: string
 }
 
 export class SignalDetector {
