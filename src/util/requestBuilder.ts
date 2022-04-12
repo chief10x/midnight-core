@@ -24,7 +24,7 @@ export class RequestBuilder {
     return new Promise((resolve: (value: T) => void, reject) => {
       switch (method) {
         case Methods.GET:
-          fetch(requestOptions.baseUrl + "/" + requestOptions.url).then((res) => {
+          fetch(requestOptions.baseUrl  +"/"+ requestOptions.url).then((res) => {
             return res.json()
           }).then((json) => {
             resolve(json)
@@ -61,7 +61,7 @@ export class RequestBuilder {
 
   requestPairFromQuery = async (query: string) => {
     return this.make<Pair, UrlData>({
-      url: `time_series?${query}&apikey=${process.env.api_key2}`,
+      url: `${query}&apikey=${process.env.api_key2}`,
     })
   }
 
@@ -92,7 +92,7 @@ export class RequestBuilder {
       url: url,
     }
 
-    await fetch(requestOptions.baseUrl + "/" + requestOptions.url, {
+    await fetch(requestOptions.baseUrl+"/" + requestOptions.url, {
       body: body,
       method: 'post',
       headers: headers

@@ -3,8 +3,8 @@ import { ComplexRequestBody, ListOrder } from "../util/types/network";
 import { now } from "./formatter";
 export const complexDataBody =
   ({ symbol, interval, start_date, end_date }: SignalDetectorProps): ComplexRequestBody => ({
-    symbols: [symbol],
-    intervals: [interval],
+    symbols: symbol,
+    intervals: interval,
     end_date: end_date,
     outputsize: 48,
     order: ListOrder.DESC,

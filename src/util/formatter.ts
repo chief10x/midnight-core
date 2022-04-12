@@ -1,6 +1,5 @@
 import { ComplexResponse } from "./types/network"
 import { timeFormat } from "d3-time-format";
-import { Log } from "./logger"
 
 export const formatComplexResponse = (resJson): Array<ComplexResponse> => {
 
