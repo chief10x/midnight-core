@@ -27,8 +27,3 @@ export interface Datum {
   values: Value[];
   status: string;
 }
-
-export interface TDComplexResponse {
-  data: Datum[];
-  status: string;
-}

@@ -13,7 +13,7 @@ export class JobProcessor {
   async handleTranscode(job: Job) {
     console.log("job started", job.data.signal);
 
-    const complexResponse: ComplexResponse[] = await this.series.postComplex(job.data.signal);
+    const complexResponse: ComplexResponse = await this.series.postComplex(job.data.signal);
     this.signal.server.emit("complexSignal", complexResponse)
   }
 }

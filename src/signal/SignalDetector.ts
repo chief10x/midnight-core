@@ -1,8 +1,8 @@
-import { ComplexProps, ComplexResponse } from "src/@types";
+import { ComplexProps, ComplexQuote } from "src/@types";
 
 export class SignalDetector {
 
-  data: Array<ComplexResponse> = []
+  data: Array<ComplexQuote> = []
 
   constructor(signalDetectorProps: ComplexProps) {
     console.log('requesting data')
@@ -10,7 +10,7 @@ export class SignalDetector {
   }
 
   // on Event of new entry
-  updateData = (newData: Array<ComplexResponse>) => {
+  updateData = (newData: Array<ComplexQuote>) => {
     this.data = [...this.data, ...newData]
   }
 

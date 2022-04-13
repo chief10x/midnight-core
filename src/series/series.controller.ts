@@ -16,7 +16,7 @@ export class SeriesController {
   };
 
   @Post("complex")
-  async postComplex(@Body() body: ComplexProps): Promise<ComplexResponse[]> {
+  async postComplex(@Body() body: ComplexProps): Promise<ComplexResponse> {
     return await this.service.postComplex(body)
   }
 }

@@ -1,6 +1,5 @@
 import fetch from 'node-fetch';
-import { AlarmData, ComplexProps, Methods, Pair, UrlData } from 'src/@types';
-import { TDComplexResponse } from 'src/@types/format.types';
+import { AlarmData, ComplexProps, Methods, Pair, UrlData, TDComplexResponse } from 'src/@types';
 import { complexDataBody } from './body.utils';
 
 var headers = {

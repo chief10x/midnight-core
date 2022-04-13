@@ -1,7 +1,7 @@
-import { ComplexResponse } from "src/@types";
-import { TDComplexResponse } from "src/@types/format.types";
+import { ComplexQuote, ComplexResponse } from "src/@types";
+import { TDComplexResponse } from "src/@types";
 
-export const formatComplexResponse = (res: TDComplexResponse): Array<ComplexResponse> => {
+export const formatComplexResponse = (res: TDComplexResponse): ComplexResponse => {
 
   if (res.data && res.data[0].values) {
 
@@ -20,9 +20,9 @@ export const formatComplexResponse = (res: TDComplexResponse): Array<ComplexResp
       return data.meta.indicator != undefined && data.meta.indicator.name.includes('MACD')
     })
 
-    const complexResponse = quotes.values.map((quote, index): ComplexResponse => {
+    const complexQuotes = quotes.values.map((quote, index): ComplexQuote => {
 
-      let quoteResponse: ComplexResponse = {
+      let quoteResponse: ComplexQuote = {
         date: new Date(quote.datetime),
         quotes: {
           high: parseFloat(quote.high),
@@ -45,6 +45,9 @@ export const formatComplexResponse = (res: TDComplexResponse): Array<ComplexResp
       return quoteResponse
     })
 
-    return complexResponse
+    return {
+      meta: quotes.meta,
+      series: complexQuotes
+    }
   }
 }

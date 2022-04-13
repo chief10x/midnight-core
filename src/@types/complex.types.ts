@@ -1,3 +1,4 @@
+import { Datum, Meta } from "./format.types"
 import { Methods } from "./network.types"
 
 export interface ComplexProps {
@@ -56,7 +57,7 @@ export interface ComplexRequestBody {
   timezone: string
 }
 
-export interface ComplexResponse {
+export interface ComplexQuote {
   date: Date,
   quotes: {
     high: Number,
@@ -70,6 +71,11 @@ export interface ComplexResponse {
   }
 }
 
+export interface ComplexResponse {
+  meta: Meta,
+  series: ComplexQuote[]
+}
+
 export interface PairData {
   pair: string
 }
@@ -77,4 +83,9 @@ export interface PairData {
 export interface PairCommandOption extends Pair {
   verbose: boolean,
   pair: Currencies
+}
+
+export interface TDComplexResponse {
+  data: Datum[];
+  status: string;
 }
