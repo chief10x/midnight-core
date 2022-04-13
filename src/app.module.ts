@@ -4,7 +4,7 @@ import { SeriesController } from './series/series.controller';
 import { ConfigModule } from '@nestjs/config';
 import { WebhookController } from './webhook/webhook.controller';
 import { webhookService } from './webhook/webhook.service'
-import { RequestBuilder } from './util/RequestBuilder';
+import { RequestBuilder } from './util/request.utils';
 import { EventsGateway } from './gateway/events.gateway';
 import { BullModule } from '@nestjs/bull';
 import { JobController } from './job/job.controller';

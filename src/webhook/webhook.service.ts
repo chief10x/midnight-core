@@ -1,5 +1,5 @@
 import { AlarmData } from 'src/@types';
-import { RequestBuilder } from '../util/RequestBuilder';
+import { RequestBuilder } from '../util/request.utils';
 
 export class webhookService {
 

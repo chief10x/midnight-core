@@ -1,5 +1,5 @@
-import { RequestBuilder } from '../util/RequestBuilder'
-import { formatComplexResponse } from '../util/formatter'
+import { RequestBuilder } from '../util/request.utils'
+import { formatComplexResponse } from '../util/format.utils'
 import { ComplexProps } from 'src/@types/complex.types'
 
 export class SeriesService {

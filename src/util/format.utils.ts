@@ -1,4 +1,3 @@
-import { timeFormat } from "d3-time-format";
 import { ComplexResponse } from "src/@types";
 import { TDComplexResponse } from "src/@types/format.types";
 
@@ -48,8 +47,4 @@ export const formatComplexResponse = (res: TDComplexResponse): Array<ComplexResp
 
     return complexResponse
   }
-}
-
-export const now = () => {
-  return timeFormat("%Y-%m-%d %H:%M:%S")(new Date())
 }
