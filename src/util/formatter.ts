@@ -1,46 +1,53 @@
 import { timeFormat } from "d3-time-format";
 import { ComplexResponse } from "src/@types";
+import { TDComplexResponse } from "src/@types/format.types";
 
-export const formatComplexResponse = (resJson): Array<ComplexResponse> => {
+export const formatComplexResponse = (res: TDComplexResponse): Array<ComplexResponse> => {
 
-  if (resJson.data && resJson.data[0].values) {
-    const atr = resJson.data[1].values
-    const ichi = resJson.data[2]?.values
-    const macd = resJson.data[3]?.values
+  if (res.data && res.data[0].values) {
 
-    const res = resJson.data[0].values.map((row, index) => {
-      var trendDown = null;
-      var trendUp = null;
-      if (macd != undefined) {
-        const rowMacd = macd[index].macd
-        const rowMacd1 = index > 0 ? macd[index - 1].macd : rowMacd
+    const quotes = res.data.find((data) => data.meta.indicator === undefined)
+    const containsIndicators = res.data.length > 1
 
-        //const rowMacd2 = macd[index - 2].macd
-        //const rowMacd3 = macd[index - 3].macd
-
-        const t1 = (rowMacd - rowMacd1) * 150
-        //const t2 = rowMacd2 - rowMacd3 * 150
-
-        trendUp = t1 >= 0 ? t1 : 0
-        trendDown = t1 < 0 ? (-1 * t1) : 0
-      }
-      return ({
-        date: new Date(row.datetime),
-        high: parseFloat(row.high),
-        low: parseFloat(row.low),
-        open: parseFloat(row.open),
-        close: parseFloat(row.close),
-        atr: atr == undefined ? null : parseFloat(atr[index].atr),
-        ichi: ichi == undefined ? null : parseFloat(ichi[index].senkou_span_a),
-        macd: macd == undefined ? null : parseFloat(macd[index].macd),
-        trendUp: trendUp,
-        trendDown: trendDown
-      })
+    const atr = res.data.find((data) => {
+      return data.meta.indicator != undefined && data.meta.indicator.name.includes('ATR')
     })
 
-    return res
+    const ichi = res.data.find((data) => {
+      return data.meta.indicator != undefined && data.meta.indicator.name.includes('ICHIMOKU')
+    })
+
+    const macd = res.data.find((data) => {
+      return data.meta.indicator != undefined && data.meta.indicator.name.includes('MACD')
+    })
+
+    const complexResponse = quotes.values.map((quote, index): ComplexResponse => {
+
+      let quoteResponse: ComplexResponse = {
+        date: new Date(quote.datetime),
+        quotes: {
+          high: parseFloat(quote.high),
+          low: parseFloat(quote.low),
+          open: parseFloat(quote.open),
+          close: parseFloat(quote.close),
+        },
+      }
+
+      if (containsIndicators) {
+        quoteResponse = {
+          ...quoteResponse,
+          indicators: {
+            atr: atr === undefined ? undefined : parseFloat(atr.values[index].atr),
+            ichi: ichi === undefined ? undefined : parseFloat(ichi.values[index].senkou_span_a)
+          }
+        }
+      }
+
+      return quoteResponse
+    })
+
+    return complexResponse
   }
-  return JSON.parse(resJson)
 }
 
 export const now = () => {

@@ -6,6 +6,14 @@ export interface ComplexProps {
   dates?: [string, string],
   start_date: string,
   end_date: string,
+  indicators: [Indicators],
+  outputsize: number,
+}
+
+export enum Indicators {
+  ICHI = 'ichi',
+  ATR = 'atr',
+  MACD = 'macd'
 }
 
 export enum ListOrder {
@@ -50,12 +58,16 @@ export interface ComplexRequestBody {
 
 export interface ComplexResponse {
   date: Date,
-  high: Number,
-  low: Number,
-  open: Number,
-  close: Number,
-  atr: Number,
-  ichi: Number,
+  quotes: {
+    high: Number,
+    low: Number,
+    open: Number,
+    close: Number,
+  },
+  indicators?: {
+    atr?: Number,
+    ichi?: Number,
+  }
 }
 
 export interface PairData {

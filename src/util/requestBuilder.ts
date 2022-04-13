@@ -1,5 +1,6 @@
 import fetch from 'node-fetch';
 import { AlarmData, ComplexProps, Methods, Pair, UrlData } from 'src/@types';
+import { TDComplexResponse } from 'src/@types/format.types';
 import { complexDataBody } from './bodyCreator';
 
 var headers = {
@@ -67,7 +68,7 @@ export class RequestBuilder {
 
     const body = complexDataBody(props)
 
-    return this.make<string, UrlData>({
+    return this.make<TDComplexResponse, UrlData>({
       url: `complex_data?apikey=${process.env.api_key2}`,
       method: Methods.POST,
       body: JSON.stringify(body)
