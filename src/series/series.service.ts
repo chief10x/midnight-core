@@ -1,12 +1,12 @@
-import { SignalDetectorProps } from '../signal/SignalDetector';
 import { RequestBuilder } from '../util/RequestBuilder'
 import { formatComplexResponse } from '../util/formatter'
+import { ComplexProps } from 'src/@types/complex.types'
 
 export class SeriesService {
 
     private readonly builder: RequestBuilder = new RequestBuilder()
 
-    async postComplex(body: SignalDetectorProps) {
+    async postComplex(body: ComplexProps) {
         const response = await this.builder.requestComplexFrom(body)
         return formatComplexResponse(response)
     }

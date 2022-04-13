@@ -1,8 +1,6 @@
-import { SignalDetectorProps } from '../signal/SignalDetector'
-import { AlarmData } from './types/alarmHook'
-import { ComplexRequestBody, ComplexResponse, Currencies, Intervals, ListOrder, Methods, Pair, UrlData } from './types/network'
-import { complexDataBody } from './bodyCreator'
 import fetch from 'node-fetch';
+import { AlarmData, ComplexProps, Methods, Pair, UrlData } from 'src/@types';
+import { complexDataBody } from './bodyCreator';
 
 var headers = {
   'Content-Type': 'application/json',
@@ -24,7 +22,7 @@ export class RequestBuilder {
     return new Promise((resolve: (value: T) => void, reject) => {
       switch (method) {
         case Methods.GET:
-          fetch(requestOptions.baseUrl  +"/"+ requestOptions.url).then((res) => {
+          fetch(requestOptions.baseUrl + "/" + requestOptions.url).then((res) => {
             return res.json()
           }).then((json) => {
             resolve(json)
@@ -65,7 +63,7 @@ export class RequestBuilder {
     })
   }
 
-  async requestComplexFrom(props: SignalDetectorProps) {
+  async requestComplexFrom(props: ComplexProps) {
 
     const body = complexDataBody(props)
 
@@ -92,7 +90,7 @@ export class RequestBuilder {
       url: url,
     }
 
-    await fetch(requestOptions.baseUrl+"/" + requestOptions.url, {
+    await fetch(requestOptions.baseUrl + "/" + requestOptions.url, {
       body: body,
       method: 'post',
       headers: headers

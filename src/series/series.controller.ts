@@ -1,25 +1,22 @@
-import { Body, Controller, Get, Post, Req, Res } from '@nestjs/common';
-import { EventsGateway } from 'src/gateway/events.gateway';
-import { SignalDetectorProps } from 'src/signal/SignalDetector';
-import { ComplexResponse } from 'src/util/types/network';
+import { Body, Controller, Get, Post, Req } from '@nestjs/common';
 import { SeriesService } from './series.service'
 import { Request } from 'express';
+import { ComplexProps, ComplexResponse } from 'src/@types';
 
 @Controller('time_series')
 export class SeriesController {
 
-    constructor(private readonly mService: SeriesService
-    ) {
+  constructor(private readonly service: SeriesService) {
 
-    }
+  }
 
-    @Get()
-    async postSeries(@Req() request: Request): Promise<any> {
-        return await this.mService.postSeries(request.url.replace("/", ""));
-    };
+  @Get()
+  async postSeries(@Req() request: Request): Promise<any> {
+    return await this.service.postSeries(request.url.replace("/", ""));
+  };
 
-    @Post("complex")
-    async postComplex(@Body() body: SignalDetectorProps): Promise<ComplexResponse[]> {
-        return await this.mService.postComplex(body)
-    }
+  @Post("complex")
+  async postComplex(@Body() body: ComplexProps): Promise<ComplexResponse[]> {
+    return await this.service.postComplex(body)
+  }
 }
