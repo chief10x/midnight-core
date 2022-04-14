@@ -2,12 +2,12 @@ import { Datum, Meta } from "./format.types"
 import { Methods } from "./network.types"
 
 export interface ComplexProps {
-  symbol: [Currencies],
-  interval: [Intervals],
+  symbol: Currencies[],
+  interval: Intervals[],
   dates?: [string, string],
   start_date: string,
   end_date: string,
-  indicators: [Indicators],
+  indicators?: Indicators[],
   outputsize: number,
 }
 

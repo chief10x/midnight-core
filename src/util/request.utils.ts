@@ -67,7 +67,12 @@ export class RequestBuilder {
 
   async requestComplexFrom(props: ComplexProps) {
 
-    const body = complexBody(props)
+    console.log("hello 1");
+
+    const body = complexDataBody(props)
+    console.log("hello2");
+
+    console.log(body);
 
     return this.make<TDComplexResponse, UrlData>({
       url: `complex_data?apikey=${process.env.api_key2}`,

@@ -1,13 +1,14 @@
 import { Process, Processor } from '@nestjs/bull';
 import { Job } from 'bull';
-import { ComplexResponse } from 'src/@types';
+import { ComplexResponse, Currencies, Intervals } from 'src/@types';
 import { EventsGateway } from 'src/gateway/events.gateway';
 import { SeriesService } from 'src/series/series.service';
 import { DateTime } from 'luxon';
 
 import {default as complexSignal} from '../../config/complexSignal.json'
-import { SignalDetectorProps } from 'src/signal/SignalDetector';
-import { ComplexResponse } from 'src/util/types/network';
+import { ComplexProps } from "src/@types";
+
+// import { ComplexResponse } from 'src/util/types/network';
 
 @Processor('complex')
 export class JobProcessor {
@@ -21,18 +22,27 @@ export class JobProcessor {
     const start_date = DateTime.now().startOf('hour').toFormat('yyyy-LL-dd HH:mm')
     const end_date = DateTime.now().toFormat('yyyy-LL-dd HH:mm')
 
-    const data: SignalDetectorProps = {
-      indicators:false,
+    const currencies: Currencies[] = []
+    complexSignal.pairs.forEach(element => {
+      currencies.push(element as Currencies)
+    });
+    const intervals: Intervals[] = [];
+    complexSignal.intervals.forEach(element => {
+      intervals.push(element as Intervals);
+    });
+    const data: ComplexProps = {
       start_date: start_date,
       end_date: end_date,
-      symbol: complexSignal.pairs,
-      interval: complexSignal.intervals
+      symbol: currencies,
+      interval: intervals,
+      outputsize:12,
+      indicators: []
     }
-    // console.log(data);
+    console.log(data);
 
-    // const complexResponse: ComplexResponse[] = await this.series.postComplex(data);
-    // console.log(complexResponse);
+    const complexResponse: ComplexResponse = await this.series.postComplex(data);
+    console.log(complexResponse);
 
-    // this.signal.server.emit("complexSignal", complexResponse)
+    this.signal.server.emit("complexSignal", complexResponse)
   }
 }

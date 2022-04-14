@@ -7,6 +7,8 @@ export class SeriesService {
     private readonly builder: RequestBuilder = new RequestBuilder()
 
     async postComplex(body: ComplexProps) {
+        console.log("hello");
+
         const response = await this.builder.requestComplexFrom(body)
         return formatComplexResponse(response)
     }
