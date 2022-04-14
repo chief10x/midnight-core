@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Post, Req } from '@nestjs/common';
 import { SeriesService } from './series.service'
 import { Request } from 'express';
-import { ComplexProps, ComplexResponse } from 'src/@types';
+import { ComplexMeta, ComplexProps, ComplexResponse } from 'src/@types';
 
 @Controller('time_series')
 export class SeriesController {
@@ -16,7 +16,7 @@ export class SeriesController {
   };
 
   @Post("complex")
-  async postComplex(@Body() body: ComplexProps): Promise<ComplexResponse> {
+  async postComplex(@Body() body: ComplexProps): Promise<ComplexMeta[]> {
     return await this.service.postComplex(body)
   }
 }

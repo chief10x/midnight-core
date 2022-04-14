@@ -31,8 +31,6 @@ export class RequestBuilder {
           })
           break
         case Methods.POST: {
-          console.log(requestOptions, body);
-
           fetch(requestOptions.baseUrl + "/" + requestOptions.url, {
             body: body,
             method: 'post',
@@ -66,14 +64,7 @@ export class RequestBuilder {
   }
 
   async requestComplexFrom(props: ComplexProps) {
-
-    console.log("hello 1");
-
     const body = complexDataBody(props)
-    console.log("hello2");
-
-    console.log(body);
-
     return this.make<TDComplexResponse, UrlData>({
       url: `complex_data?apikey=${process.env.api_key2}`,
       method: Methods.POST,

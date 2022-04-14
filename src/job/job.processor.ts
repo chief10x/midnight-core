@@ -1,6 +1,6 @@
 import { Process, Processor } from '@nestjs/bull';
 import { Job } from 'bull';
-import { ComplexResponse, Currencies, Intervals } from 'src/@types';
+import { ComplexMeta, ComplexResponse, Currencies, Intervals } from 'src/@types';
 import { EventsGateway } from 'src/gateway/events.gateway';
 import { SeriesService } from 'src/series/series.service';
 import { DateTime } from 'luxon';
@@ -18,7 +18,6 @@ export class JobProcessor {
   @Process('complex')
   async handleTranscode(job: Job) {
     console.log("job started");
-    // console.log("signal", complexSignal);
     const start_date = DateTime.now().startOf('hour').toFormat('yyyy-LL-dd HH:mm')
     const end_date = DateTime.now().toFormat('yyyy-LL-dd HH:mm')
 
@@ -38,11 +37,7 @@ export class JobProcessor {
       outputsize:12,
       indicators: []
     }
-    console.log(data);
-
-    const complexResponse: ComplexResponse = await this.series.postComplex(data);
-    console.log(complexResponse);
-
+    const complexResponse: ComplexMeta[] = await this.series.postComplex(data);
     this.signal.server.emit("complexSignal", complexResponse)
   }
 }

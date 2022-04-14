@@ -30,7 +30,9 @@ export enum Currencies {
 export enum Intervals {
   DAY = '1day',
   HOUR = '1h',
-  Minute = '30min',
+  HHour = '30min',
+  FMinute= '5min',
+  QMinute= '15min'
 }
 
 export interface UrlData {
@@ -69,6 +71,13 @@ export interface ComplexQuote {
     atr?: Number,
     ichi?: Number,
   }
+}
+export interface ComplexMeta{
+  complexQuote: ComplexQuote[],
+  symbol: string,
+  interval: string,
+  currency_base: string,
+  currency_quote: string
 }
 
 export interface ComplexResponse {
