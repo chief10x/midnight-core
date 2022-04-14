@@ -1,0 +1,10 @@
+{
+    "pairs": [
+        "EUR/USD"
+    ],
+    "intervals": [
+        "5min",
+        "15min",
+        "30min"
+    ]
+}

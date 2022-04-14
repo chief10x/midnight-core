@@ -3,6 +3,11 @@ import { timeFormat } from "d3-time-format";
 
 export const formatComplexResponse = (resJson): Array<ComplexResponse> => {
 
+  console.log(resJson);
+  if (resJson.code == 429) {
+    return null;
+  }
+
   if (resJson.data && resJson.data[0].values) {
     const atr = resJson.data[1].values
     const ichi = resJson.data[2]?.values

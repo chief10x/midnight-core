@@ -33,8 +33,8 @@ export enum Methods {
   }
 
   export interface ComplexRequestBody {
-    symbols: Array<Currencies>,
-    intervals: Array<Intervals>,
+    symbols: Array<string>,
+    intervals: Array<string>,
     start_date?: string,
     end_date?: string,
     methods: Array<any>,

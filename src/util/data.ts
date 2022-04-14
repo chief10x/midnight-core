@@ -1,4 +1,4 @@
-import { complexDataBody } from "./bodyCreator";
+import { complexBody } from "./bodyCreator";
 import { RequestBuilder } from "./RequestBuilder";
 import { SignalDetectorProps } from "../signal/SignalDetector";
 import { ComplexResponse } from "./types/network";

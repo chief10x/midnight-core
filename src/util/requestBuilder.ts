@@ -1,7 +1,7 @@
 import { SignalDetectorProps } from '../signal/SignalDetector'
 import { AlarmData } from './types/alarmHook'
 import { ComplexRequestBody, ComplexResponse, Currencies, Intervals, ListOrder, Methods, Pair, UrlData } from './types/network'
-import { complexDataBody } from './bodyCreator'
+import { complexBody } from './bodyCreator'
 import fetch from 'node-fetch';
 
 var headers = {
@@ -33,6 +33,8 @@ export class RequestBuilder {
           })
           break
         case Methods.POST: {
+          console.log(requestOptions, body);
+
           fetch(requestOptions.baseUrl + "/" + requestOptions.url, {
             body: body,
             method: 'post',
@@ -67,7 +69,7 @@ export class RequestBuilder {
 
   async requestComplexFrom(props: SignalDetectorProps) {
 
-    const body = complexDataBody(props)
+    const body = complexBody(props)
 
     return this.make<string, UrlData>({
       url: `complex_data?apikey=${process.env.api_key2}`,
