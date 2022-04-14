@@ -1,32 +1,21 @@
-import { ComplexResponse, Currencies, Intervals } from "../util/types/network";
-import { getData } from "../util/data";
-
-export interface SignalDetectorProps {
-  symbol: string[],
-  interval: string[],
-  dates?: [string, string],
-  start_date: string,
-  end_date: string,
-  indicators: boolean
-}
+import { ComplexProps, ComplexQuote } from "src/@types";
 
 export class SignalDetector {
 
-  data: Array<ComplexResponse> = []
+  data: Array<ComplexQuote> = []
 
-  constructor(signalDetectorProps: SignalDetectorProps) {
+  constructor(signalDetectorProps: ComplexProps) {
     console.log('requesting data')
     this.requestData(signalDetectorProps)
   }
 
   // on Event of new entry
-  updateData = (newData: Array<ComplexResponse>) => {
+  updateData = (newData: Array<ComplexQuote>) => {
     this.data = [...this.data, ...newData]
   }
 
   // Asks data util for the latest data!
-  private requestData = async (signalDetectorProps: SignalDetectorProps) => {
-    const data = await getData(signalDetectorProps)
-    console.log('DataProvider', data)
+  private requestData = async (signalDetectorProps: ComplexProps) => {
+
   }
 }

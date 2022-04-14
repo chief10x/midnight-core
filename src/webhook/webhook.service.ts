@@ -1,13 +1,11 @@
-import { Injectable } from "@nestjs/common";
-import { AlarmData } from "src/util/types/alarmHook";
-import { RequestBuilder } from '../util/RequestBuilder';
+import { AlarmData } from 'src/@types';
+import { RequestBuilder } from '../util/request.utils';
 
 export class webhookService {
 
-    private readonly mBuilder: RequestBuilder = new RequestBuilder()
+  private readonly mBuilder: RequestBuilder = new RequestBuilder()
 
-    async postWebhook(body: AlarmData) {
-        await this.mBuilder.sendMessageToDiscord(body)
-    }
-
+  async postWebhook(body: AlarmData) {
+    await this.mBuilder.sendMessageToDiscord(body)
+  }
 }

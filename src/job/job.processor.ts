@@ -1,5 +1,6 @@
 import { Process, Processor } from '@nestjs/bull';
 import { Job } from 'bull';
+import { ComplexResponse } from 'src/@types';
 import { EventsGateway } from 'src/gateway/events.gateway';
 import { SeriesService } from 'src/series/series.service';
 import { DateTime } from 'luxon';
