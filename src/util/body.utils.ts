@@ -8,6 +8,6 @@ export const complexDataBody =
     end_date: end_date,
     outputsize: outputsize,
     order: ListOrder.DESC,
-    timezone: process.env.TIME_ZONE,
+    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
     methods: ['time_series', ...indicators]
   })
