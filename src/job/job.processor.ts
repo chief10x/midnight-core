@@ -5,7 +5,7 @@ import { EventsGateway } from 'src/gateway/events.gateway';
 import { SeriesService } from 'src/series/series.service';
 import { DateTime } from 'luxon';
 
-import {default as complexSignal} from '../../config/complexSignal.json'
+import { default as complexSignal } from '../../config/complexSignal.json'
 import { ComplexProps } from "src/@types";
 
 // import { ComplexResponse } from 'src/util/types/network';
@@ -34,7 +34,7 @@ export class JobProcessor {
       end_date: end_date,
       symbol: currencies,
       interval: intervals,
-      outputsize:12,
+      outputsize: 12,
       indicators: []
     }
     const complexResponse: ComplexMeta[] = await this.series.postComplex(data);
