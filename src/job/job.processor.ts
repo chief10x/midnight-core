@@ -7,6 +7,7 @@ import { DateTime } from 'luxon';
 
 import { default as complexSignal } from '../../config/complexSignal.json'
 import { ComplexProps } from "src/@types";
+import { Log } from 'src/util/logger';
 
 // import { ComplexResponse } from 'src/util/types/network';
 
@@ -38,6 +39,7 @@ export class JobProcessor {
       indicators: []
     }
     const complexResponse: ComplexMeta[] = await this.series.postComplex(data);
+    Log.log(complexResponse)
     this.signal.server.emit("complexSignal", complexResponse)
   }
 }
