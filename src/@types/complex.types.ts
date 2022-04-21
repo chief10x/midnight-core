@@ -85,11 +85,6 @@ export interface ComplexResponse {
   series: ComplexQuote[]
 }
 
-export interface ComplexSignal {
-  pairs: Currencies[],
-  intervals: Intervals[],
-}
-
 export interface PairData {
   pair: string
 }

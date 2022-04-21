@@ -1,12 +1,11 @@
 import { Process, Processor } from '@nestjs/bull';
 import { Job } from 'bull';
-import { ComplexMeta, ComplexSignal } from 'src/@types';
+import { ComplexConfig, ComplexMeta, ComplexProps } from 'src/@types';
 import { EventsGateway } from 'src/gateway/events.gateway';
 import { SeriesService } from 'src/series/series.service';
 import { DateTime } from 'luxon';
 
 import { default as complexSignal } from '../../config/complexSignal.json'
-import { ComplexProps } from "src/@types";
 import { Log } from 'src/util/logger';
 
 // Redis calls this on cycle
@@ -21,7 +20,7 @@ export class JobProcessor {
     const start_date = DateTime.now().startOf('hour').toFormat('yyyy-LL-dd HH:mm')
     const end_date = DateTime.now().toFormat('yyyy-LL-dd HH:mm')
 
-    const { pairs, intervals } = complexSignal as ComplexSignal
+    const { pairs, intervals } = complexSignal as ComplexConfig
 
     const data: ComplexProps = {
       start_date: start_date,
