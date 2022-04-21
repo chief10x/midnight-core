@@ -1,6 +1,6 @@
 import { Process, Processor } from '@nestjs/bull';
 import { Job } from 'bull';
-import { ComplexMeta, ComplexResponse, Currencies, Intervals } from 'src/@types';
+import { ComplexMeta, ComplexSignal } from 'src/@types';
 import { EventsGateway } from 'src/gateway/events.gateway';
 import { SeriesService } from 'src/series/series.service';
 import { DateTime } from 'luxon';
@@ -9,8 +9,7 @@ import { default as complexSignal } from '../../config/complexSignal.json'
 import { ComplexProps } from "src/@types";
 import { Log } from 'src/util/logger';
 
-// import { ComplexResponse } from 'src/util/types/network';
-
+// Redis calls this on cycle
 @Processor('complex')
 export class JobProcessor {
 
@@ -22,24 +21,20 @@ export class JobProcessor {
     const start_date = DateTime.now().startOf('hour').toFormat('yyyy-LL-dd HH:mm')
     const end_date = DateTime.now().toFormat('yyyy-LL-dd HH:mm')
 
-    const currencies: Currencies[] = []
-    complexSignal.pairs.forEach(element => {
-      currencies.push(element as Currencies)
-    });
-    const intervals: Intervals[] = [];
-    complexSignal.intervals.forEach(element => {
-      intervals.push(element as Intervals);
-    });
+    const { pairs, intervals } = complexSignal as ComplexSignal
+
     const data: ComplexProps = {
       start_date: start_date,
       end_date: end_date,
-      symbol: currencies,
+      symbol: pairs,
       interval: intervals,
       outputsize: 12,
       indicators: []
     }
+
     const complexResponse: ComplexMeta[] = await this.series.postComplex(data);
     Log.log(complexResponse)
+
     this.signal.server.emit("complexSignal", complexResponse)
   }
 }

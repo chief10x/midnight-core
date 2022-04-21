@@ -31,8 +31,8 @@ export enum Intervals {
   DAY = '1day',
   HOUR = '1h',
   HHour = '30min',
-  FMinute= '5min',
-  QMinute= '15min'
+  FMinute = '5min',
+  QMinute = '15min'
 }
 
 export interface UrlData {
@@ -72,7 +72,7 @@ export interface ComplexQuote {
     ichi?: Number,
   }
 }
-export interface ComplexMeta{
+export interface ComplexMeta {
   complexQuote: ComplexQuote[],
   symbol: string,
   interval: string,
@@ -83,6 +83,11 @@ export interface ComplexMeta{
 export interface ComplexResponse {
   meta: Meta,
   series: ComplexQuote[]
+}
+
+export interface ComplexSignal {
+  pairs: Currencies[],
+  intervals: Intervals[],
 }
 
 export interface PairData {
