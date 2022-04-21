@@ -9,6 +9,7 @@ import { EventsGateway } from './gateway/events.gateway';
 import { BullModule } from '@nestjs/bull';
 import { JobController } from './job/job.controller';
 import { JobProcessor } from './job/job.processor';
+import { KucoinModule } from './kucoin/kucoin.module';
 
 @Module({
   imports: [ConfigModule.forRoot(), RequestBuilder,
@@ -22,6 +23,7 @@ import { JobProcessor } from './job/job.processor';
       password: process.env.REDIS_PASSWORD
     },
   }),
+  KucoinModule,
   ],
   controllers: [JobController, SeriesController, WebhookController],
   providers: [SeriesService, webhookService, EventsGateway, JobProcessor],
