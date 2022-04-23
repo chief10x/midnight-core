@@ -14,8 +14,8 @@ export class SeriesController {
   @Get()
   async postSeries(@Req() request: Request): Promise<any> {
     const response = await this.service.postSeries(request.url.replace("/", ""));
-    Log.log(request.url)
-    Log.log(response)
+    // Log.log(request.url)
+    // Log.log(response)
     return response
 
   };
@@ -23,8 +23,8 @@ export class SeriesController {
   @Post("complex")
   async postComplex(@Body() body: ComplexProps): Promise<ComplexMeta[]> {
     const response = await this.service.postComplex(body);
-    Log.log(body)
-    Log.log(response)
+    // Log.log(body)
+    // Log.log(response)
     return response
   }
 }

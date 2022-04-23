@@ -72,10 +72,15 @@ export interface ComplexQuote {
     ichi?: Number,
   }
 }
+
+export interface ComplexInterval {
+  interval: Intervals
+  values: ComplexQuote,
+}
 export interface ComplexMeta {
-  complexQuote: ComplexQuote[],
+  // complexQuote: ComplexQuote[],
   symbol: string,
-  interval: string,
+  interval: ComplexInterval[],
   currency_base: string,
   currency_quote: string
 }
