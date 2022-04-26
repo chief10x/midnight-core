@@ -5,7 +5,7 @@ import { Datum } from "../@types/format.types";
 export const formatComplexResponse = (res: TDComplexResponse): ComplexMeta[] => {
 
   if (res.data && res.data[0].values) {
-    const uniqueSymbols = [...new Map(res.data.map(item =>[item.meta['symbol'], item.meta])).values()];
+    const uniqueSymbols = [...new Map(res.data.map(item => [item.meta['symbol'], item.meta])).values()];
     const uniqueIntervals = [...new Set(res.data.flatMap(({ meta }) => meta.interval))].sort()
 
     const containsIndicators = res.data.length > 1
@@ -23,11 +23,9 @@ export const formatComplexResponse = (res: TDComplexResponse): ComplexMeta[] => 
           const macd = res.data.find((data) => {
             return data.meta.interval == data2.meta.interval && data.meta.indicator != undefined && data.meta.indicator.name.includes('MACD')
           })
-          console.log(getQuote(data2, containsIndicators, atr, ichi));
-
           return getQuote(data2, containsIndicators, atr, ichi);
         })
-        return  { interval: interval, values: quotes[0][0] } as ComplexInterval
+        return { interval: interval, values: quotes[0][0] } as ComplexInterval
       })
       metas.push({
         currency_base: meta.currency_base,

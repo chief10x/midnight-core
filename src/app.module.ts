@@ -10,20 +10,24 @@ import { BullModule } from '@nestjs/bull';
 import { JobController } from './job/job.controller';
 import { JobProcessor } from './job/job.processor';
 import { KucoinModule } from './kucoin/kucoin.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
-  imports: [ConfigModule.forRoot(), RequestBuilder,
-  BullModule.registerQueue({
-    name: 'complex',
-  }),
-  BullModule.forRoot({
-    redis: {
-      host: process.env.REDIS_HOST,
-      port: parseInt(process.env.REDIS_PORT),
-      password: process.env.REDIS_PASSWORD
-    },
-  }),
-  KucoinModule,
+  imports: [
+    ConfigModule.forRoot(),
+    RequestBuilder,
+    BullModule.registerQueue({
+      name: 'complex',
+    }),
+    BullModule.forRoot({
+      redis: {
+        host: process.env.REDIS_HOST,
+        port: parseInt(process.env.REDIS_PORT),
+        password: process.env.REDIS_PASSWORD
+      },
+    }),
+    KucoinModule,
+    AuthModule
   ],
   controllers: [JobController, SeriesController, WebhookController],
   providers: [SeriesService, webhookService, EventsGateway, JobProcessor],

@@ -1,11 +1,17 @@
-import { Body, Controller, Delete, Get, Param, Post } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Post, UseGuards } from "@nestjs/common";
+import { Roles } from "src/@types";
 import { kucoinOrder } from "src/@types/kucoin.types";
+import JwtAuthenticationGuard from "src/auth/jwt-authentication.guard";
+import RoleGuard from "src/auth/role.guard";
 import { Log } from "src/util/logger";
 import { KucoinFutureService } from "./kucoin.future.service";
 import { KucoinSpotService } from "./kucoin.spot.service";
 
+@UseGuards(RoleGuard(Roles.ADMIN))
+@UseGuards(JwtAuthenticationGuard)
 @Controller('kucoin/spot')
 export class SpotController {
+
     constructor(private readonly spotService: KucoinSpotService,
         private readonly futureService: KucoinFutureService) { }
 
